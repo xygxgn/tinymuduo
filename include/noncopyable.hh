@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _TINYMUDUO_NONCOPYABLE_H
+#define _TINYMUDUO_NONCOPYABLE_H
 
 class noncopyable
 {
@@ -9,3 +10,5 @@ protected:
     noncopyable() = default;
     ~noncopyable() = default;
 };
+
+#endif

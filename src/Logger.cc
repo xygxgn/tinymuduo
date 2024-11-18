@@ -1,6 +1,7 @@
+#include "Logger.hh"
+
 #include <iostream>
 
-#include "Logger.hh"
 
 Logger& Logger::instance()
 {

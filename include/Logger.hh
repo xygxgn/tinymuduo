@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _TINYMUDUO_LOGGER_H
+#define _TINYMUDUO_LOGGER_H
 
 #include <string>
 
@@ -77,3 +78,4 @@ private:
     int logLevel_;
 };
 
+#endif

@@ -18,3 +18,13 @@ aux_source_directory(./src SRC_LIST)
 add_library(tinymuduo SHARED
   ${SRC_LIST}
 )
+
+# add_executable(
+#   test
+#   src/InetAddress.cc
+# )
+
+# target_link_libraries(
+#   test
+#   tinymuduo
+# )

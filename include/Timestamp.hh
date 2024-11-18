@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _TINYMUDUO_TIMESTAMP_H
+#define _TINYMUDUO_TIMESTAMP_H
 
 #include <iostream>
 #include <string>
@@ -13,3 +14,5 @@ public:
 private:
     int64_t microSecondsSinceEpoch_;
 };
+
+#endif

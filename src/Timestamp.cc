@@ -1,7 +1,6 @@
-#include <time.h>
-
 #include "Timestamp.hh"
 
+#include <time.h>
 
 Timestamp::Timestamp() : microSecondsSinceEpoch_(0) {}
 
