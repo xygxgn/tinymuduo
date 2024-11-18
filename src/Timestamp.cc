@@ -27,3 +27,9 @@ std::string Timestamp::toString() const
         tm_time->tm_sec);
     return buf;
 }
+
+int main()
+{
+    std::cout << Timestamp::now().toString() << std::endl;
+    return 0;
+}
