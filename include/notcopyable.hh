@@ -1,5 +1,4 @@
-#ifndef __NONCOPYABLE_H
-#define __NONCOPYABLE_H
+#pragma once
 
 class noncopyable
 {
@@ -10,5 +9,3 @@ protected:
     noncopyable() = default;
     ~noncopyable() = default;
 };
-
-#endif
