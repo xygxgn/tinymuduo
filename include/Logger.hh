@@ -1,9 +1,9 @@
 #ifndef _TINYMUDUO_LOGGER_H
 #define _TINYMUDUO_LOGGER_H
 
-#include <string>
-
 #include "noncopyable.hh"
+
+#include <string>
 
 #define LOG_INFO(logMsgFormat, ...) \
     do \

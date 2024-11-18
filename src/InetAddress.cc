@@ -37,7 +37,6 @@ const sockaddr_in* InetAddress::getSockAddrIn() const
     return &addr_;
 }
 
-
 const sockaddr* InetAddress::getSockAddr() const
 {
     return (sockaddr*)(&addr_);
