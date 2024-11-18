@@ -14,7 +14,7 @@ void Logger::setLogLevel(int level)
     logLevel_ = level;
 }
 
-void Logger::log(std::string& msg)
+void Logger::log(std::string msg)
 {
     switch (logLevel_)
     {

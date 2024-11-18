@@ -15,8 +15,8 @@ public:
     using EventCallback = std::function<void()>;
     using ReadEventCallback = std::function<void(Timestamp)>;
 
-    Channel();
     Channel(EventLoop *loop, int fd);
+    ~Channel();
 
     void handleEvent(Timestamp receieveTime);
 
@@ -43,7 +43,7 @@ public:
     bool isReading() { return events_ & kReadEvent; }
 
     int index() { return index_; }
-    int setIndex(int idx) { index_ = idx; }
+    void setIndex(int idx) { index_ = idx; }
 
     EventLoop* ownerLoop() { return loop_; }
     void remove();
