@@ -37,4 +37,6 @@ void Logger::log(std::string& msg)
     default:
         break;
     }
+
+    std::cout << "print time : " << msg << std::endl;
 }

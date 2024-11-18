@@ -4,6 +4,59 @@
 
 #include "noncopyable.hh"
 
+#define LOG_INFO(logMsgFormat, ...) \
+    do \
+    {\
+        Logger &logger = Logger::instance();\
+        logger.setLogLevel(INFO);\
+        char buf[1024] = {0};\
+        snprintf(buf, 1024, logMsgFormat, ##__VA_ARGS__);\
+        logger.log(buf);\
+    } while(0)
+
+#define LOG_WARM(logMsgFormat, ...) \
+    do \
+    {\
+        Logger &logger = Logger::instance();\
+        logger.setLogLevel(WARM);\
+        char buf[1024] = {0};\
+        snprintf(buf, 1024, logMsgFormat, ##__VA_ARGS__);\
+        logger.log(buf);\
+    } while(0)
+
+#define LOG_ERROR(logMsgFormat, ...) \
+    do \
+    {\
+        Logger &logger = Logger::instance();\
+        logger.setLogLevel(ERROR);\
+        char buf[1024] = {0};\
+        snprintf(buf, 1024, logMsgFormat, ##__VA_ARGS__);\
+        logger.log(buf);\
+    } while(0)
+
+#define LOG_FATAL(logMsgFormat, ...) \
+    do \
+    {\
+        Logger &logger = Logger::instance();\
+        logger.setLogLevel(FATAL);\
+        char buf[1024] = {0};\
+        snprintf(buf, 1024, logMsgFormat, ##__VA_ARGS__);\
+        logger.log(buf);\
+    } while(0)
+
+#ifdef MUDUO_DEBUG
+#define LOG_DEBUG(logMsgFormat, ...) \
+    do \
+    {\
+        Logger &logger = Logger::instance();\
+        logger.setLogLevel(DEBUG);\
+        char buf[1024] = {0};\
+        snprintf(buf, 1024, logMsgFormat, ##__VA_ARGS__);\
+        logger.log(buf);\
+    } while(0)
+#else
+#define LOG_DEBUG(logMsgFormat, ...)
+#endif
 enum LogLevel
 {
     INFO,
