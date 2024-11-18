@@ -1,7 +1,6 @@
 #include "InetAddress.hh"
 
 #include <strings.h>
-#include <iostream>
 
 
 InetAddress::InetAddress(const sockaddr_in &addr) 
