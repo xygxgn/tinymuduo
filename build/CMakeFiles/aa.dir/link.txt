@@ -1,1 +1,0 @@
-/usr/bin/g++  -g  -rdynamic CMakeFiles/aa.dir/src/InetAddress.cc.o  -o ../bin/aa  -Wl,-rpath,/home/pulsar/projects/tinymuduo/lib ../lib/libtinymuduo.so 

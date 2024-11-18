@@ -1,3 +1,0 @@
-/home/pulsar/projects/tinymuduo/build/CMakeFiles/rebuild_cache.dir
-/home/pulsar/projects/tinymuduo/build/CMakeFiles/edit_cache.dir
-/home/pulsar/projects/tinymuduo/build/CMakeFiles/tinymuduo.dir
