@@ -13,8 +13,12 @@ include_directories(
   include
 )
 
-aux_source_directory(./src SRC_LIST)
+# file(GLOB_RECURSE PROJECT_SOURCE_FILES ${CMAKE_CURRENT_LIST_DIR}/src/*.cc)
+# add_library(tinymuduo SHARED
+#   ${PROJECT_SOURCE_FILES}
+# )
 
+aux_source_directory(./src SRC_LIST)
 add_library(tinymuduo SHARED
   ${SRC_LIST}
 )
