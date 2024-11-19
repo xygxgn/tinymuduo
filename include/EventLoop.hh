@@ -28,8 +28,8 @@ public:
 
     Timestamp pollReturnTime() const { return pollReturnTime_; }
     
-    void runInLoop(); 
-    void queueInLoop();
+    void runInLoop(Functor cb); 
+    void queueInLoop(Functor cb);
 
     void wakeup();
 
@@ -57,7 +57,6 @@ private:
     std::unique_ptr<Channel> wakeupChannel_;
 
     ChannelList activeChannels_;
-    Channel *currentActiveChannel_;
 
     std::atomic<bool> callingPendingFunctors_;
     std::vector<Functor> pendingFunctors_;

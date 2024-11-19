@@ -30,8 +30,7 @@ EventLoop::EventLoop()
       threadId_(CurrentThread::tid()),
       poll_(Poller::newDefaultPoller(this)),
       wakeupFd_(createEventfd()),
-      wakeupChannel_(new Channel(this, wakeupFd_)),
-      currentActiveChannel_(nullptr)
+      wakeupChannel_(new Channel(this, wakeupFd_))
 {
     LOG_DEBUG("EventLoop created %p in thread %d\n", this, threadId_);
     if (t_loopInThisThread)
@@ -55,13 +54,98 @@ EventLoop::~EventLoop()
     t_loopInThisThread = nullptr;
 }
 
+void EventLoop::loop()
+{
+    looping_ = true;
+    quit_ = false;
+    
+    LOG_INFO("EventLoop %p start looping\n", this);
+
+    while (!quit_)
+    {
+        activeChannels_.clear();
+        pollReturnTime_ = poll_->poll(kPollTimeMs, &activeChannels_);
+        for (Channel *channel : activeChannels_)
+        {
+            channel->handleEvent(pollReturnTime_);
+        }
+        doPendingFunctors();
+    }
+    LOG_INFO("EventLoop %p stop looping\n", this);
+    looping_ = false;
+}
+
+void EventLoop::quit()
+{
+    quit_ = false;
+    if (!isInLoopThread())
+    {
+        wakeup();
+    }
+}
+
+void EventLoop::runInLoop(Functor cb)
+{
+    if (isInLoopThread())
+    {
+        cb();
+    }
+    else
+    {
+        queueInLoop(cb);
+    }
+}
+
+void EventLoop::queueInLoop(Functor cb)
+{
+    {
+        std::lock_guard<std::mutex> locker(mutex_);
+        pendingFunctors_.emplace_back(cb);
+    }
+
+    if (!isInLoopThread() || callingPendingFunctors_)
+    {
+        wakeup();
+    }
+}
 
 void EventLoop::handleRead()
 {
     uint64_t one = 1;
-    ssize_t n = read(wakeupFd_, &one, sizeof(one));
+    ssize_t n = ::read(wakeupFd_, &one, sizeof(one));
     if (n != sizeof(one))
     {
         LOG_ERROR("EventLoop::handleRead() reads %lu bytes instead of 8", n);
     }
+}
+
+void EventLoop::wakeup()
+{
+    // wakeupChannel_->setReadCallback(std::bind(&EventLoop::handleRead, this));
+    uint64_t one = 1;
+    ssize_t n = ::write(wakeupFd_, &one, sizeof(one));
+    if (n != sizeof(one))
+    {
+        LOG_ERROR("EventLoop::wakeup() writes %lu bytes instead of 8", n);
+    }
+}
+
+void EventLoop::updateChannel(Channel *channel)
+{
+    poll_->updateChannel(channel);
+}
+
+void EventLoop::removeChannel(Channel *channel)
+{
+    poll_->removeChannel(channel);
+}
+
+bool EventLoop::hasChannel(Channel *channel)
+{
+    return poll_->hasChannel(channel);
+}
+
+void EventLoop::doPendingFunctors()
+{
+
 }
