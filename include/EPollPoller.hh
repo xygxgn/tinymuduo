@@ -6,7 +6,7 @@
 #include <vector>
 #include <sys/epoll.h>
 
-class EPollPoller : Poller
+class EPollPoller : public Poller
 {
 public:
     EPollPoller(EventLoop *loop);
