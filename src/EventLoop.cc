@@ -147,5 +147,15 @@ bool EventLoop::hasChannel(Channel *channel)
 
 void EventLoop::doPendingFunctors()
 {
-
+    std::vector<Functor> functors;
+    callingPendingFunctors_ = true;
+    {
+        std::lock_guard<std::mutex> locker(mutex_);
+        functors.swap(pendingFunctors_);
+    }
+    for (const Functor &functor : functors)
+    {
+        functor();
+    }
+    callingPendingFunctors_ = false;
 }
