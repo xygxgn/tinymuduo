@@ -3,6 +3,7 @@
 
 #include "noncopyable.hh"
 
+#include <stdlib.h>
 #include <string>
 
 #define LOG_INFO(logMsgFormat, ...) \
