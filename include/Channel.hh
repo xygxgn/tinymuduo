@@ -25,11 +25,11 @@ public:
     void setCloseCallback(EventCallback cb) { closeCallback_ = std::move(cb); }
     void setErrorCallback(EventCallback cb) { errorCallback_ = std::move(cb); }
 
-    void tie(const std::shared_ptr<void> &);
+    void tie(const std::shared_ptr<void> &obj);
 
     int fd() const { return fd_; }
     int events() const { return events_; }
-    void set_revents(int revents) { revents_ = revents; }
+    void setRevents(int revents) { revents_ = revents; }
     bool isNonEvent() const { return events_ == kNoneEvent; }
 
     void enableReading() { events_ |= kReadEvent; update(); }
