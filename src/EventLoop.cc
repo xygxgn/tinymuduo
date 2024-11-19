@@ -64,5 +64,4 @@ void EventLoop::handleRead()
     {
         LOG_ERROR("EventLoop::handleRead() reads %lu bytes instead of 8", n);
     }
-
 }
