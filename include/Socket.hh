@@ -15,7 +15,7 @@ public:
 
     void bindAddress(const InetAddress &localaddr);
     void listen();
-    int accept(InetAddress *peeraddr);
+    int accept(InetAddress *peerAddr);
 
     void shotdownWrite(bool on);
     void setTcpNoDelay(bool on);

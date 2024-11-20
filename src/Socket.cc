@@ -29,7 +29,7 @@ void Socket::listen()
     }
 }
 
-int Socket::accept(InetAddress *peeraddr)
+int Socket::accept(InetAddress *peerAddr)
 {
     sockaddr_in addr;
     socklen_t len;
@@ -37,7 +37,7 @@ int Socket::accept(InetAddress *peeraddr)
     int connfd = ::accept(sockfd_, (sockaddr*) &addr, &len);
     if (connfd >= 0)
     {
-        peeraddr->setSockAddrIn(addr);
+        peerAddr->setSockAddrIn(addr);
     }
     return connfd;
 }
