@@ -18,10 +18,11 @@ TcpServer::TcpServer(EventLoop *loop, const InetAddress listenAddr, const std::s
       ipPort_(listenAddr.toIpPort()),
       name_(nameArg),
       acceptor_(new Acceptor(loop, listenAddr, option == kReusePort)),
-      eventLoopThreadPool_(new EventLoopThreadPool(loop, name_)),
+      threadPool_(new EventLoopThreadPool(loop, name_)),
       connectionCallback_(),
       messageCallback_(),
-      nextConnId_(1)
+      nextConnId_(1),
+      started_(0)
 {
     acceptor_->setNewConnectionCallback(std::bind(&TcpServer::newConnection, this, 
         std::placeholders::_1, std::placeholders::_2));
@@ -34,10 +35,29 @@ TcpServer::~TcpServer()
 
 void TcpServer::setThreadNum(int numThreads)
 {
-
+    threadPool_->setThreadNum(numThreads);
 }
 
 void TcpServer::start()
+{
+    if (started_++ == 0)
+    {
+        threadPool_->start(threadInitCallback_);
+        loop_->runInLoop(std::bind(&Acceptor::listen, acceptor_.get()));
+    }
+}
+
+void TcpServer::newConnection(int sockfd, const InetAddress &peerAddr)
+{
+
+}
+
+void TcpServer::removeConnection(const TcpConnectionPtr &conn)
+{
+
+}
+
+void TcpServer::removeConnectionInLoop(const TcpConnectionPtr &conn)
 {
 
 }

@@ -5,7 +5,8 @@
 
 InetAddress::InetAddress(const sockaddr_in &addr) 
     : addr_(addr) 
-    {}
+{
+}
 
 InetAddress::InetAddress(uint16_t port, std::string ip)
 {
