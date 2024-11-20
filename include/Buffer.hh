@@ -16,7 +16,7 @@ public:
           readerIndex_(kCheapPrepend),
           writerIndex_(kCheapPrepend)
     {}
-    
+
     size_t readableBytes() const {return writerIndex_ - readerIndex_; }
     size_t writableBytes() const {return buffer_.size() - writerIndex_; }
     size_t prependableBytes() const { return readerIndex_; }
@@ -84,7 +84,5 @@ private:
     size_t readerIndex_;
     size_t writerIndex_;
 };
-
-
 
 #endif
