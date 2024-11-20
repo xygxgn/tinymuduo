@@ -8,9 +8,8 @@
 class InetAddress
 {
 public:
-    InetAddress() = delete;
     explicit InetAddress(const sockaddr_in &addr);
-    explicit InetAddress(uint16_t port, std::string ip = "127.0.0.1");
+    explicit InetAddress(uint16_t port = 0, std::string ip = "127.0.0.1");
     std::string toIp() const;
     std::string toIpPort() const;
     uint16_t toPort() const;
