@@ -25,7 +25,7 @@ public:
 private:
     void handleRead();
 
-    EventLoop* loop_;
+    EventLoop *loop_;
     Socket acceptSocket_;
     Channel acceptChannel_;
     NewConnectionCallback newConnectionCallback_;

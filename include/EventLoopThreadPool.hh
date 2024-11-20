@@ -25,7 +25,7 @@ public:
     bool started() const { return started_; }
     const std::string name() const { return name_; }
 private:
-    EventLoop* baseLoop_;
+    EventLoop *baseLoop_;
     std::string name_;
     bool started_;
     int numThreads_;
