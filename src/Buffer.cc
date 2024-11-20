@@ -3,8 +3,59 @@
 #include <errno.h>
 #include <sys/uio.h>
 
+Buffer::Buffer(size_t initialSize) 
+    : buffer_(kCheapPrepend + initialSize),
+      readerIndex_(kCheapPrepend),
+      writerIndex_(kCheapPrepend)
+{
+}
+
 Buffer::~Buffer()
 {
+}
+
+void Buffer::retrieve(size_t len)
+{
+    if (len < readableBytes())
+    {
+        readerIndex_ += len;
+    }
+    else
+    {
+        retrieveAll();
+    }
+}
+
+void Buffer::retrieveAll()
+{
+    readerIndex_ = writerIndex_ = kCheapPrepend;
+}
+
+std::string Buffer::retrieveAllAsString()
+{
+    return retrieveAsString(readableBytes());
+}
+
+std::string Buffer::retrieveAsString(size_t len)
+{
+    std::string result(peek(), len);
+    retrieve(len);
+    return result;
+}
+
+void Buffer::ensureWritableBytes(size_t len)
+{
+    if (writableBytes() < len)
+    {
+        makeSpace(len);
+    }
+}
+
+void Buffer::append(const char *data, size_t len)
+{
+    ensureWritableBytes(len);
+    std::copy(data, data + len, beginWrite());
+    writerIndex_ += len; 
 }
 
 ssize_t Buffer::readFd(int fd, int *saveErrno)
@@ -33,4 +84,19 @@ ssize_t Buffer::readFd(int fd, int *saveErrno)
         append(extrabuf, n - writable);
     }
     return n;
+}
+
+void Buffer::makeSpace(size_t len)
+{
+    if (writableBytes() + prependableBytes() < len + kCheapPrepend)
+    {
+        buffer_.resize(writerIndex_ + len);
+    }
+    else
+    {
+        size_t readable = readableBytes();
+        std::copy(begin() + readerIndex_, begin() + writerIndex_, begin() + kCheapPrepend);
+        readerIndex_ = kCheapPrepend;
+        writerIndex_ = readerIndex_ + readable;
+    }
 }
