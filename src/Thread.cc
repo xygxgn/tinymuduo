@@ -5,7 +5,7 @@
 
 std::atomic<int32_t> Thread::numCreated_(0);
 
-explicit Thread::Thread(ThreadFunc func, const std::string &name = std::string())
+Thread::Thread(ThreadFunc func, const std::string &name)
     : started_(false),
       joined_(false),
       tid_(0),
