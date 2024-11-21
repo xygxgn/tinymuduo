@@ -9,6 +9,7 @@
 
 #include <memory>
 #include <atomic>
+#include <string>
 
 class EventLoop;
 class Channel;
@@ -27,7 +28,6 @@ public:
 
     bool connected() const { return state_ == kConnected; }
 
-    void send(const void *message, int len);
     void shutdown();
 
     void setConnectionCallback(const ConnectionCallback &cb) { connectionCallback_ = cb; }
@@ -46,14 +46,19 @@ private:
         kConnected,
         kDisconnecting
     };
+    void setState(StateE state) { state_ = state; }
 
     void handleRead(Timestamp receiveTime);
     void handleWrite();
     void handleClose();
     void handleError();
 
-    void sendInLoop(const void *message, size_t len);
+    void send(const std::string &buf);
+    void sendInLoop(const void *data, size_t len);
+
+    void shutdown();
     void shutdownInLoop();
+
 
     EventLoop *loop_;
     const std::string name_;

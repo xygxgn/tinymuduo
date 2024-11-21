@@ -61,6 +61,7 @@ public:
     const char* beginWrite() const { return begin() + writerIndex_; }
 
     ssize_t readFd(int fd, int *saveErrno);
+    ssize_t writeFd(int fd, int *saveErrno);
 private:
     char* begin() { return &*buffer_.begin(); }
     const char* begin() const { return &*buffer_.begin(); }
