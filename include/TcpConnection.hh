@@ -5,6 +5,7 @@
 #include "InetAddress.hh"
 #include "Callbacks.hh"
 #include "Buffer.hh"
+#include "Timestamp.hh"
 
 #include <memory>
 #include <atomic>
@@ -25,6 +26,18 @@ public:
     const InetAddress& peerAddress() const { return peerAddr_; }
 
     bool connected() const { return state_ == kConnected; }
+
+    void send(const void *message, int len);
+    void shutdown();
+
+    void setConnectionCallback(const ConnectionCallback &cb) { connectionCallback_ = cb; }
+    void setMessageCallback(const MessageCallback &cb) { messageCallback_ = cb; }
+    void setWriteCompleteCallback(const WriteCompleteCallback &cb) { writeCompleteCallback_ = cb; }
+    void setHighWaterMarkCallback(const HighWaterMarkCallback &cb) { highWaterMarkCallback_ = cb; }
+    void setCloseCallback(const CloseCallback &cb) { closeCallback_ = cb; }
+
+    void connectEstablished();
+    void connectDestroyed();
 private:
     enum StateE
     {
@@ -33,6 +46,15 @@ private:
         kConnected,
         kDisconnecting
     };
+
+    void handleRead(Timestamp receiveTime);
+    void handleWrite();
+    void handleClose();
+    void handleError();
+
+    void sendInLoop(const void *message, size_t len);
+    void shutdownInLoop();
+
     EventLoop *loop_;
     const std::string name_;
     std::atomic<int> state_;
