@@ -28,6 +28,8 @@ public:
 
     bool connected() const { return state_ == kConnected; }
 
+    void send(const std::string &buf);
+
     void shutdown();
 
     void setConnectionCallback(const ConnectionCallback &cb) { connectionCallback_ = cb; }
@@ -53,7 +55,6 @@ private:
     void handleClose();
     void handleError();
 
-    void send(const std::string &buf);
     void sendInLoop(const void *data, size_t len);
 
     void shutdownInLoop();

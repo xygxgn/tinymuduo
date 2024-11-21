@@ -17,7 +17,8 @@ public:
     void listen();
     int accept(InetAddress *peerAddr);
 
-    void shotdownWrite(bool on);
+    void shutdownWrite();
+    
     void setTcpNoDelay(bool on);
     void setReuseAddr(bool on);
     void setReusePort(bool on);

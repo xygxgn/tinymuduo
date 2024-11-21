@@ -189,8 +189,39 @@ void TcpConnection::sendInLoop(const void *data, size_t len)
     }
 }
 
+void TcpConnection::connectEstablished()
+{
+    setState(kConnected);
+    channel_->tie(shared_from_this());
+    channel_->enableReading();
+    connectionCallback_(shared_from_this());
+}
+
+void TcpConnection::connectDestroyed()
+{
+    if (state_ == kConnected)
+    {
+        setState(kDisconnected);
+        channel_->disableAll();
+        connectionCallback_(shared_from_this());
+        channel_->remove();
+    }
+}
 
 void TcpConnection::shutdown()
 {
+    if (state_ == kConnected)
+    {
+        setState(kDisconnecting);
+        loop_->runInLoop(std::bind(&TcpConnection::shutdownInLoop, this));
+    }
+}
 
+
+void TcpConnection::shutdownInLoop()
+{
+    if (!channel_->isWriting())
+    {
+        socket_->shutdownWrite();
+    }
 }

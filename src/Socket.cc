@@ -42,11 +42,11 @@ int Socket::accept(InetAddress *peerAddr)
     return connfd;
 }
 
-void Socket::shotdownWrite(bool on)
+void Socket::shutdownWrite()
 {
     if (::shutdown(sockfd_, SHUT_RD) < 0)
     {
-        LOG_ERROR("Socket::showdownWrite error");
+        LOG_ERROR("Socket::shutdownWrite error");
     }
 }
 
