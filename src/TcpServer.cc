@@ -4,7 +4,7 @@
 #include "EventLoopThreadPool.hh"
 #include "Acceptor.hh"
 
-EventLoop* CheckLoopNotNull(EventLoop *loop)
+static EventLoop* CheckLoopNotNull(EventLoop *loop)
 {
     if (loop == nullptr)
     {
