@@ -56,9 +56,7 @@ private:
     void send(const std::string &buf);
     void sendInLoop(const void *data, size_t len);
 
-    void shutdown();
     void shutdownInLoop();
-
 
     EventLoop *loop_;
     const std::string name_;
