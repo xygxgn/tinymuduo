@@ -41,7 +41,6 @@ TcpServer::~TcpServer()
     }
 }
 
-
 void TcpServer::setThreadNum(int numThreads)
 {
     threadPool_->setThreadNum(numThreads);
@@ -58,6 +57,7 @@ void TcpServer::start()
 
 void TcpServer::newConnection(int sockfd, const InetAddress &peerAddr)
 {
+    // sellect a subreactor to process the connection
     EventLoop *ioLoop = threadPool_->getNextLoop();
     char buf[64] = {0};
     ::snprintf(buf, sizeof(buf), "-%s#%d", ipPort_.c_str(), nextConnId_);
@@ -76,13 +76,15 @@ void TcpServer::newConnection(int sockfd, const InetAddress &peerAddr)
     }
     InetAddress localAddr(localAddrIn);
 
+    // create a new connection
     TcpConnectionPtr conn(new TcpConnection(ioLoop, connName, sockfd, localAddr, peerAddr));
     connections_[connName] = conn;
     conn->setConnectionCallback(connectionCallback_);
     conn->setMessageCallback(messageCallback_);
     conn->setWriteCompleteCallback(writeCompleteCallback_);
-
     conn->setCloseCallback(std::bind(&TcpServer::removeConnection, this, std::placeholders::_1));
+
+    // the selected reactor is responsible for the new connection
     ioLoop->runInLoop(std::bind(&TcpConnection::connectEstablished, conn));
 }
 
