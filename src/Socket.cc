@@ -32,9 +32,9 @@ void Socket::listen()
 int Socket::accept(InetAddress *peerAddr)
 {
     sockaddr_in addr;
-    socklen_t len;
+    socklen_t len = sizeof(addr);
     ::memset(&addr, 0, sizeof(sockaddr));
-    int connfd = ::accept(sockfd_, (sockaddr*) &addr, &len);
+    int connfd = ::accept4(sockfd_, (sockaddr*) &addr, &len, SOCK_NONBLOCK | SOCK_CLOEXEC);
     if (connfd >= 0)
     {
         peerAddr->setSockAddrIn(addr);
