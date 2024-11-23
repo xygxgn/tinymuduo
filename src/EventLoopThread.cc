@@ -6,7 +6,7 @@
 EventLoopThread::EventLoopThread(const ThreadInitCallback &cb, const std::string &name)
     : loop_(nullptr),
       exiting_(false),
-      thread_(std::bind(&EventLoopThread::threadFunc, this), name),
+      thread_(std::bind(&EventLoopThread::threadFunc, this), name), // loop starts when thread_ is created
       mutex_(),
       cond_(),
       callback_(cb)
@@ -52,7 +52,7 @@ void EventLoopThread::threadFunc()
         cond_.notify_one();
     }
 
-    loop.loop();
+    loop.loop(); // loop for each reactor
 
     std::unique_lock<std::mutex> locker(mutex_);
     loop_ = nullptr;

@@ -22,7 +22,7 @@ public:
 
     EventLoop* getNextLoop();
     std::vector<EventLoop*> getAllLoops();
-    
+
     bool started() const { return started_; }
     const std::string name() const { return name_; }
 private:

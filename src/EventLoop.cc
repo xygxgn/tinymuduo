@@ -61,7 +61,7 @@ void EventLoop::loop()
     
     LOG_INFO("EventLoop %p start looping\n", this);
 
-    while (!quit_)
+    while (!quit_) // Eventloop for each reactor
     {
         activeChannels_.clear();
         pollReturnTime_ = poll_->poll(kPollTimeMs, &activeChannels_);

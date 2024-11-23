@@ -41,7 +41,6 @@ void Acceptor::listen()
     acceptChannel_.enableReading();
 }
 
-
 void Acceptor::handleRead()
 {
     InetAddress peerAddr;
