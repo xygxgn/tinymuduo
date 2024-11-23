@@ -1,7 +1,6 @@
 #ifndef _TINYMUDUO_TIMESTAMP_H
 #define _TINYMUDUO_TIMESTAMP_H
 
-#include <iostream>
 #include <string>
 
 class Timestamp

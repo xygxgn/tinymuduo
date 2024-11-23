@@ -37,7 +37,6 @@ void Channel::remove()
 void Channel::update()
 {
     loop_->updateChannel(this);
-
 }
 
 void Channel::handleEvent(Timestamp receieveTime)
