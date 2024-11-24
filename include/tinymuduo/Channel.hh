@@ -57,10 +57,10 @@ private:
     static const int kWriteEvent;
 
     EventLoop *loop_;
-    const int fd_;
-    int events_;
-    int revents_;
-    int index_;
+    const int fd_; // packaged socket
+    int events_; // registed events (EPOLLHUP | EPOLLIN | EPOLLPRI | EPOLLOUT)
+    int revents_; // return events (EPOLLHUP | EPOLLIN | EPOLLPRI | EPOLLOUT)
+    int index_; // kNoneEvent | kReadEvent | kWriteEvent
 
     std::weak_ptr<void> tie_;
     bool tied_;
