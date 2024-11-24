@@ -1,5 +1,5 @@
-#include "Thread.hh"
-#include "CurrentThread.hh"
+#include "tinymuduo/Thread.hh"
+#include "tinymuduo/CurrentThread.hh"
 
 #include <semaphore.h>
 

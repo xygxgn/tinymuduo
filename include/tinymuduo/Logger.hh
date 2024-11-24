@@ -1,7 +1,7 @@
 #ifndef _TINYMUDUO_LOGGER_H
 #define _TINYMUDUO_LOGGER_H
 
-#include "noncopyable.hh"
+#include "tinymuduo/noncopyable.hh"
 
 #include <stdlib.h>
 #include <string>

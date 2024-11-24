@@ -1,8 +1,8 @@
 #ifndef _TINYMUDUO_CHANNEL_H
 #define _TINYMUDUO_CHANNEL_H
 
-#include "noncopyable.hh"
-#include "Timestamp.hh"
+#include "tinymuduo/noncopyable.hh"
+#include "tinymuduo/Timestamp.hh"
 
 #include <functional>
 #include <memory>

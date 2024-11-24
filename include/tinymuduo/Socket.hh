@@ -1,7 +1,7 @@
 #ifndef _TINYMUDUO_SOCKET_H
 #define _TINYMUDUO_SOCKET_H
 
-#include "noncopyable.hh"
+#include "tinymuduo/noncopyable.hh"
 
 class InetAddress;
 

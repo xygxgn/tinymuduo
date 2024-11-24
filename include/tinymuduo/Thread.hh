@@ -1,7 +1,7 @@
 #ifndef _TINYMUDUO_THREAD_H
 #define _TINYMUDUO_THREAD_H
 
-#include "noncopyable.hh"
+#include "tinymuduo/noncopyable.hh"
 
 #include <functional>
 #include <thread>

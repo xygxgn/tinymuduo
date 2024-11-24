@@ -1,8 +1,8 @@
 #ifndef _TINYMUDUO_EVENTLOOPTHREAD_H
 #define _TINYMUDUO_EVENTLOOPTHREAD_H
 
-#include "noncopyable.hh"
-#include "Thread.hh"
+#include "tinymuduo/noncopyable.hh"
+#include "tinymuduo/Thread.hh"
 
 #include <functional>
 #include <mutex>

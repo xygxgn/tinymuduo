@@ -1,10 +1,10 @@
 #ifndef _TINYMUDUO_ACCEPTOR_H
 #define _TINYMUDUO_ACCEPTOR_H
 
-#include "noncopyable.hh"
-#include "Socket.hh"
-#include "Channel.hh"
-#include "Acceptor.hh"
+#include "tinymuduo/noncopyable.hh"
+#include "tinymuduo/Socket.hh"
+#include "tinymuduo/Channel.hh"
+#include "tinymuduo/Acceptor.hh"
 
 #include <functional>
 
