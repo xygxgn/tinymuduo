@@ -56,7 +56,7 @@ private:
     static const int kReadEvent;
     static const int kWriteEvent;
 
-    EventLoop *loop_;
+    EventLoop *loop_; // eventLoop the channel belongs to
     const int fd_; // packaged socket
     int events_; // registed events (EPOLLHUP | EPOLLIN | EPOLLPRI | EPOLLOUT)
     int revents_; // return events (EPOLLHUP | EPOLLIN | EPOLLPRI | EPOLLOUT)

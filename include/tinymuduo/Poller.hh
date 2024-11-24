@@ -25,12 +25,12 @@ public:
     bool hasChannel(Channel *channel) const;
     static Poller* newDefaultPoller(EventLoop *loop);
 protected:
-    // key: sockfd, value: channel
+    // key:value <==> sockfd:channel
     using ChannelMap = std::unordered_map<int, Channel*>;
 
     ChannelMap channels_;
 private:
-    EventLoop *ownerLoop_;
+    EventLoop *ownerLoop_; // eventLoop the poller belongs to
 };
 
 #endif

@@ -24,7 +24,8 @@ void EventLoopThreadPool::start(const ThreadInitCallback &cb)
     {
         char buf[name_.size() + 32];
         ::snprintf(buf, sizeof(buf), "%s%d", name_.c_str(), i);
-        EventLoopThread *t = new EventLoopThread(cb, buf); // EventLoopThread starts when constructed
+        // EventLoopThread starts when constructed
+        EventLoopThread *t = new EventLoopThread(cb, buf);
         threads_.emplace_back(t);
         loops_.push_back(t->startLoop());
     }
@@ -41,7 +42,7 @@ EventLoop* EventLoopThreadPool::getNextLoop()
 
     if (!loops_.empty())
     {
-        loop = loops_[next_++];
+        loop = loops_[next_++]; // polling subreactors
         
         if (next_ >= static_cast<int>(loops_.size()))
         {

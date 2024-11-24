@@ -59,12 +59,12 @@ private:
 
     void shutdownInLoop();
 
-    EventLoop *loop_;
-    const std::string name_;
+    EventLoop *loop_; // subreactor(multi-threads) main reactor(single threads)
+    const std::string name_; // connection name
     std::atomic<int> state_;
     bool reading_;
-    std::unique_ptr<Socket> socket_;
-    std::unique_ptr<Channel> channel_;
+    std::unique_ptr<Socket> socket_; // Socket of connection fd
+    std::unique_ptr<Channel> channel_; // Channel of connection fd
 
     const InetAddress localAddr_;
     const InetAddress peerAddr_;

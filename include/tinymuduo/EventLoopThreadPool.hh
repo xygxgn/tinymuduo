@@ -26,10 +26,10 @@ public:
     bool started() const { return started_; }
     const std::string name() const { return name_; }
 private:
-    EventLoop *baseLoop_;
+    EventLoop *baseLoop_; // main reactor
     std::string name_;
     bool started_;
-    int numThreads_;
+    int numThreads_; // number of subreactors (NOT including main reactor)
     int next_;
     std::vector<std::unique_ptr<EventLoopThread>> threads_;
     std::vector<EventLoop*> loops_;

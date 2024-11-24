@@ -24,9 +24,9 @@ public:
 private:
     void handleRead();
 
-    EventLoop *loop_;
-    Socket acceptSocket_;
-    Channel acceptChannel_;
+    EventLoop *loop_; // main reactor
+    Socket acceptSocket_; // Socket of listen fd
+    Channel acceptChannel_; // Channel of listen fd
     NewConnectionCallback newConnectionCallback_;
     bool listenning_;
 };
