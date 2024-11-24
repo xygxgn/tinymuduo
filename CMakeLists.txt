@@ -23,12 +23,14 @@ add_library(tinymuduo SHARED
   ${SRC_LIST}
 )
 
-# add_executable(
-#   test
-#   src/InetAddress.cc
-# )
+add_executable(
+  test
+  example/test.cc
+)
 
-# target_link_libraries(
-#   test
-#   tinymuduo
-# )
+target_link_libraries(
+  test
+  tinymuduo
+  pthread
+)
+

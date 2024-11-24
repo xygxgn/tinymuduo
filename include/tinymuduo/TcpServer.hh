@@ -4,6 +4,10 @@
 #include "tinymuduo/noncopyable.hh"
 #include "tinymuduo/Callbacks.hh"
 #include "tinymuduo/InetAddress.hh"
+#include "tinymuduo/TcpConnection.hh"
+// #include "tinymuduo/EventLoop.hh"
+// #include "tinymuduo/Acceptor.hh"
+// #include "tinymuduo/EventLoopThreadPool.hh"
 
 #include <functional>
 #include <string>

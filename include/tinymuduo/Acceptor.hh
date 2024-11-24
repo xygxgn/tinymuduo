@@ -4,7 +4,6 @@
 #include "tinymuduo/noncopyable.hh"
 #include "tinymuduo/Socket.hh"
 #include "tinymuduo/Channel.hh"
-#include "tinymuduo/Acceptor.hh"
 
 #include <functional>
 
