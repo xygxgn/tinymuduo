@@ -1,6 +1,8 @@
 #ifndef _TINYMUDUO_EVENTLOOPTHREADPOOL_H
 #define _TINYMUDUO_EVENTLOOPTHREADPOOL_H
 
+#include "tinymuduo/noncopyable.hh"
+
 #include <functional>
 #include <string>
 #include <vector>
@@ -9,7 +11,7 @@
 class EventLoop;
 class EventLoopThread;
 
-class EventLoopThreadPool
+class EventLoopThreadPool : noncopyable
 {
 public:
     using ThreadInitCallback = std::function<void(EventLoop*)>;

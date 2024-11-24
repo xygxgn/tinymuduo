@@ -1,9 +1,11 @@
 #ifndef _TINYMUDUO_TIMESTAMP_H
 #define _TINYMUDUO_TIMESTAMP_H
 
+#include "tinymuduo/copyable.hh"
+
 #include <string>
 
-class Timestamp
+class Timestamp : public copyable
 {
 public:
     Timestamp();

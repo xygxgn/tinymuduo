@@ -1,11 +1,11 @@
 #ifndef _TINYMUDUO_COPYABLE_H
 #define _TINYMUDUO_COPYABLE_H
 
-class noncopyable
+class copyable
 {
 protected:
-    noncopyable() = default;
-    ~noncopyable() = default;
+    copyable() = default;
+    ~copyable() = default;
 };
 
 #endif

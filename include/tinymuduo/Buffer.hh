@@ -1,11 +1,23 @@
 #ifndef _TINYMUDUO_BUFFER_H
 #define _TINYMUDUO_BUFFER_H
 
+#include "tinymuduo/copyable.hh"
+
 #include <vector>
 #include <string>
 #include <algorithm>
 
-class Buffer
+/// A buffer class modeled after org.jboss.netty.buffer.ChannelBuffer
+///
+/// @code
+/// +-------------------+------------------+------------------+
+/// | prependable bytes |  readable bytes  |  writable bytes  |
+/// |                   |     (CONTENT)    |                  |
+/// +-------------------+------------------+------------------+
+/// |                   |                  |                  |
+/// 0      <=      readerIndex   <=   writerIndex    <=     size
+/// @endcode
+class Buffer : public copyable
 {
 public:
     static const size_t kCheapPrepend = 8;
@@ -17,8 +29,8 @@ public:
           writerIndex_(kCheapPrepend)
     {}
 
-    size_t readableBytes() const {return writerIndex_ - readerIndex_; }
-    size_t writableBytes() const {return buffer_.size() - writerIndex_; }
+    size_t readableBytes() const { return writerIndex_ - readerIndex_; }
+    size_t writableBytes() const { return buffer_.size() - writerIndex_; }
     size_t prependableBytes() const { return readerIndex_; }
     const char* peek() const { return begin() + readerIndex_; }
     

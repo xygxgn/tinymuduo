@@ -1,11 +1,13 @@
 #ifndef _TINYMUDUO_INETADDRESS_H
 #define _TINYMUDUO_INETADDRESS_H
 
+#include "tinymuduo/copyable.hh"
+
 #include <arpa/inet.h>
 #include <netinet/in.h>
 #include <string>
 
-class InetAddress
+class InetAddress : public copyable
 {
 public:
     explicit InetAddress(const sockaddr_in &addr);
