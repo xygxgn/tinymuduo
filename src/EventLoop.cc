@@ -121,7 +121,6 @@ void EventLoop::handleRead()
 
 void EventLoop::wakeup()
 {
-    // wakeupChannel_->setReadCallback(std::bind(&EventLoop::handleRead, this));
     uint64_t one = 1;
     ssize_t n = ::write(wakeupFd_, &one, sizeof(one));
     if (n != sizeof(one))
