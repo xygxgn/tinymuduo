@@ -8,7 +8,7 @@
 #include <stdio.h>
 
 // state of channel->index_
-const int kNew =  -1;
+const int kNew = -1;
 const int kAdded = 1;
 const int kDeleted = 2;
 
