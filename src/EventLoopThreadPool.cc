@@ -42,7 +42,7 @@ EventLoop* EventLoopThreadPool::getNextLoop()
 
     if (!loops_.empty())
     {
-        loop = loops_[next_++]; // polling subreactors
+        loop = loops_[next_++]; // round-robin subreactors
         
         if (next_ >= static_cast<int>(loops_.size()))
         {
